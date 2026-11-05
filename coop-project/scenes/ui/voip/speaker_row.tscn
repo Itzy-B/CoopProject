@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="../../../scripts/voip/speaker_row.gd" id="1_script"]
+[ext_resource type="Texture2D" path="../../../addons/other_ui/local_voice.svg" id="2_icon"]
+
+[sub_resource type="StyleBoxFlat" id="Style_row"]
+bg_color = Color(0.065, 0.082, 0.11, 0.92)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[node name="SpeakerRow" type="PanelContainer"]
+custom_minimum_size = Vector2(294, 48)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_row")
+script = ExtResource("1_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Content" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="Margin/Content"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+text = "Player name"
+text_overrun_behavior = 3
+clip_text = true

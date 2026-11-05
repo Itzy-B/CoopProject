@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bhsxitg4qv7kc"]
+
+[ext_resource type="Script" uid="uid://dxuqho3d3qswe" path="res://scripts/voip/voice_status_popup.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/voip/speaker_row.tscn" id="2_row"]
+[ext_resource type="Texture2D" uid="uid://61ni0uywxpgm" path="res://addons/other_ui/local_voice.svg" id="3_s0k5y"]
+[ext_resource type="Texture2D" uid="uid://dcpl5a3uxrg8p" path="res://addons/other_ui/radio_voice.svg" id="4_cd1mm"]
+
+[sub_resource type="StyleBoxFlat" id="Style_row"]
+bg_color = Color(0.065, 0.082, 0.11, 0.92)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="VoiceStatusPopup" type="CanvasLayer" unique_id=542749985]
+layer = 91
+script = ExtResource("1_script")
+speaker_row_scene = ExtResource("2_row")
+proximity_icon = ExtResource("3_s0k5y")
+radio_icon = ExtResource("4_cd1mm")
+
+[node name="Root" type="MarginContainer" parent="." unique_id=1771757744]
+anchors_preset = -1
+anchor_left = 0.0050000004
+anchor_top = 0.185
+anchor_right = 0.158
+anchor_bottom = 0.23
+offset_left = 0.39999962
+offset_top = 0.19999695
+offset_right = 0.63998413
+offset_bottom = -0.40000916
+mouse_filter = 2
+
+[node name="Rows" type="VBoxContainer" parent="Root" unique_id=51529860]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Preview" parent="Root/Rows" unique_id=679026170 instance=ExtResource("2_row")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_row")
+script = null

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://o3c2cd52dta2"]
+
+[ext_resource type="Script" uid="uid://qx62ewhy54s5" path="res://scripts/ui/esc_menu/connection_loading.gd" id="1_loading"]
+
+[node name="ConnectionLoading" type="CanvasLayer" unique_id=115464061]
+layer = 100
+script = ExtResource("1_loading")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1817459310]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.035, 0.055, 1)
+
+[node name="Center" type="CenterContainer" parent="Overlay" unique_id=124888764]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Message" type="VBoxContainer" parent="Overlay/Center" unique_id=1682112145]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Overlay/Center/Message" unique_id=83219637]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Joining game"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Overlay/Center/Message" unique_id=303639313]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.77, 0.85, 1)
+theme_override_font_sizes/font_size = 22
+text = "Joining party..."
+horizontal_alignment = 1

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dddh6ovi63vus"]
+
+[ext_resource type="Script" uid="uid://cc6u2ns7l8o5g" path="res://scripts/player/player.gd" id="1_8afob"]
+[ext_resource type="PackedScene" uid="uid://yxcodfaonc1n" path="res://scenes/player/player_voice.tscn" id="2_dovo2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yf5fn"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8afob"]
+properties/0/path = NodePath(".:network_sample")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[node name="Player" type="CharacterBody3D" unique_id=2125957066]
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1546720361]
+shape = SubResource("CapsuleShape3D_yf5fn")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1062519115]
+replication_interval = 0.033
+replication_config = SubResource("SceneReplicationConfig_8afob")
+
+[node name="PlayerVoice" parent="." unique_id=734290185 instance=ExtResource("2_dovo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3231419, 0)
+
+[node name="Visual" type="Node3D" parent="." unique_id=1886262432]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual" unique_id=1835243558]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1715347240]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=783058255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6894475, -0.51649445)
+fov = 50.0
+size = 8.0

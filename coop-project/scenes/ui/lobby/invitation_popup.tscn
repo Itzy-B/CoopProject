@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://clvtb0sdvj7dh"]
+
+[ext_resource type="Script" uid="uid://ce0kek3c8x2r0" path="res://scripts/ui/esc_menu/invitation_popup.gd" id="1_popup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_popup"]
+bg_color = Color(0.045, 0.06, 0.085, 0.98)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.36, 0.68, 0.88, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="InvitationPopup" type="CanvasLayer" unique_id=1688622687]
+layer = 90
+script = ExtResource("1_popup")
+
+[node name="Root" type="MarginContainer" parent="." unique_id=2101311082]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root" unique_id=651623430]
+custom_minimum_size = Vector2(294, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBox_popup")
+
+[node name="Margin" type="MarginContainer" parent="Root/Panel" unique_id=971670325]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="Content" type="VBoxContainer" parent="Root/Panel/Margin" unique_id=905806907]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Root/Panel/Margin/Content" unique_id=1304142215]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.76, 0.96, 1)
+theme_override_font_sizes/font_size = 16
+text = "PARTY INVITATION"
+
+[node name="Profile" type="HBoxContainer" parent="Root/Panel/Margin/Content" unique_id=1464105686]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Avatar" type="TextureRect" parent="Root/Panel/Margin/Content/Profile" unique_id=447444620]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="Root/Panel/Margin/Content/Profile" unique_id=1342969181]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Inviter" type="Label" parent="Root/Panel/Margin/Content/Profile/Text" unique_id=2098388069]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Player name"
+text_overrun_behavior = 3
+
+[node name="Details" type="Label" parent="Root/Panel/Margin/Content/Profile/Text" unique_id=1636723997]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Invited you to their party."
+autowrap_mode = 3
+
+[node name="Expires" type="Label" parent="Root/Panel/Margin/Content" unique_id=1062073414]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 13
+text = "Expires in 60s"
+
+[node name="Actions" type="HBoxContainer" parent="Root/Panel/Margin/Content" unique_id=358700251]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Accept" type="Button" parent="Root/Panel/Margin/Content/Actions" unique_id=841941034]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Accept  [F6]"
+
+[node name="Refuse" type="Button" parent="Root/Panel/Margin/Content/Actions" unique_id=1412665781]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Refuse  [F7]"
+
+[node name="Hint" type="Label" parent="Root/Panel/Margin/Content" unique_id=1510031149]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 13
+text = "Use steam friends, or press Esc to click."

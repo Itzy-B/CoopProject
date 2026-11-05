@@ -1,0 +1,560 @@
+[gd_scene format=3 uid="uid://cqdfj6aivqsd1"]
+
+[ext_resource type="Script" uid="uid://ba7duqq3ns2qv" path="res://scripts/networking/esc_menu.gd" id="1_vionn"]
+[ext_resource type="PackedScene" uid="uid://dhd4ikd26aeo7" path="res://scenes/ui/esc_menu/friend_panel.tscn" id="2_rjv1v"]
+[ext_resource type="Shader" uid="uid://cvbrbj2nx0qpf" path="res://shaders/ui/esc_menu/roundProfileShader.gdshader" id="3_jv6dw"]
+[ext_resource type="Script" uid="uid://bc1x6xxwi30co" path="res://scripts/networking/party_portraits.gd" id="3_wdack"]
+[ext_resource type="Texture2D" uid="uid://ce3r151ygvrho" path="res://addons/kenny_ui/kenny_game_icons/White/1x/zoom.png" id="3_xmnxe"]
+[ext_resource type="Texture2D" uid="uid://gibpf1swv6ip" path="res://addons/kenny_ui/kenny_game_icons/White/1x/locked.png" id="4_1dp0q"]
+[ext_resource type="Texture2D" uid="uid://d1bmnsdl3lct1" path="res://addons/kenny_ui/kenny_game_icons/White/1x/zoomIn.png" id="4_fqs4f"]
+[ext_resource type="Texture2D" uid="uid://cw5y4efdoka7g" path="res://addons/kenny_ui/kenny_board_game/Default (64px)/pawn.png" id="5_dqey7"]
+[ext_resource type="Texture2D" uid="uid://dudbf6jvfqxs1" path="res://addons/kenny_ui/kenny_game_icons/White/1x/unlocked.png" id="5_or21h"]
+[ext_resource type="Texture2D" uid="uid://dkerq3w87jmv1" path="res://addons/kenny_ui/kenny_board_game/Default (64px)/flag_triangle.png" id="6_1a838"]
+[ext_resource type="Shader" uid="uid://bdbwwu4gr3uyo" path="res://shaders/ui/esc_menu/fadeProfileNamePlates.gdshader" id="6_6fupv"]
+[ext_resource type="Script" uid="uid://cfvj8ag03xpoq" path="res://scripts/ui/esc_menu/scrolling_names.gd" id="6_mq3pm"]
+[ext_resource type="Script" uid="uid://by3cp20k8ff8x" path="res://scripts/ui/esc_menu/friend_viewport_container_fade_stop.gd" id="7_n2vdt"]
+[ext_resource type="Texture2D" uid="uid://bcd204xtguj20" path="res://addons/kenny_ui/kenny_game_icons/White/1x/export.png" id="12_5oa12"]
+[ext_resource type="Texture2D" uid="uid://f8mv1kqj20ci" path="res://addons/kenny_ui/kenny_game_icons/White/1x/door.png" id="12_or21h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjv1v"]
+shader = ExtResource("3_jv6dw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68740976, 0.5188335, 0.23898906, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 20
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fcnqv"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqey7"]
+shader = ExtResource("6_6fupv")
+shader_parameter/fade_height = 0.05
+shader_parameter/fade_top = false
+shader_parameter/fade_bottom = false
+
+[node name="EscMenu" type="Control" unique_id=895070378 node_paths=PackedStringArray("options_container", "host_panel", "lobby_portraits", "party_section", "error_display", "host_button", "hold_progress", "online_container", "offline_container", "invite_sent_container", "party_container", "in_game_container", "my_portrait", "my_name_label", "party_code_section", "party_code_field", "hide_code_button", "copy_code_button", "join_code_section", "join_code_field", "join_code_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vionn")
+friend_panel_scene = ExtResource("2_rjv1v")
+options_container = NodePath("OptionsVBoxContainer")
+host_panel = NodePath("HostVBoxContainer")
+lobby_portraits = NodePath("HostVBoxContainer/LobbyHBoxContainer")
+party_section = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party")
+error_display = NodePath("ErrorDisplay")
+host_button = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Confirm")
+hold_progress = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Confirm/ConfirmProgressBar")
+online_container = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Online/OnlineVBoxContainer")
+offline_container = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Offline/OfflineVBoxContainer")
+invite_sent_container = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party/InvitesSentVBoxContainer")
+party_container = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party/PartyVBoxContainer")
+in_game_container = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/InGame/InGameVBoxContainer")
+code_hidden_texture = ExtResource("3_xmnxe")
+code_visible_texture = ExtResource("4_fqs4f")
+my_portrait = NodePath("HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer/MePortrait")
+my_name_label = NodePath("HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer/NameClip/MeLabel")
+party_code_section = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer")
+party_code_field = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer/PartyCodeLineEdit")
+hide_code_button = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer/HideTextureButton")
+copy_code_button = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer/CopyTextureButton")
+join_code_section = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer")
+join_code_field = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer/JoinHBoxContainer/JoinLineEdit")
+join_code_button = NodePath("HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer/JoinHBoxContainer/JoinTextureButton")
+
+[node name="OptionsVBoxContainer" type="VBoxContainer" parent="." unique_id=309759061]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.93900007
+anchor_right = 0.23500001
+anchor_bottom = 1.0
+offset_top = -0.12005615
+offset_right = 0.7999878
+grow_vertical = 0
+alignment = 2
+
+[node name="SettingsButton" type="Button" parent="OptionsVBoxContainer" unique_id=197697379]
+layout_mode = 2
+text = "Settings"
+
+[node name="ExitGameButton" type="Button" parent="OptionsVBoxContainer" unique_id=1759947283]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="HostVBoxContainer" type="VBoxContainer" parent="." unique_id=942648373]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -660.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="LobbyHBoxContainer" type="HBoxContainer" parent="HostVBoxContainer" unique_id=1011483076]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 40
+alignment = 1
+script = ExtResource("3_wdack")
+locked_texture = ExtResource("4_1dp0q")
+unlocked_texture = ExtResource("5_or21h")
+
+[node name="LobbySettingsVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/LobbyHBoxContainer" unique_id=471290794]
+layout_mode = 2
+
+[node name="LobbySettingsTextureButton" type="TextureButton" parent="HostVBoxContainer/LobbyHBoxContainer/LobbySettingsVBoxContainer" unique_id=1707348116]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 20)
+
+[node name="LobbySettingsLabel" type="Label" parent="HostVBoxContainer/LobbyHBoxContainer/LobbySettingsVBoxContainer" unique_id=1794580113]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Player3VBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/LobbyHBoxContainer" unique_id=828540752]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Player3Portrait" type="TextureButton" parent="HostVBoxContainer/LobbyHBoxContainer/Player3VBoxContainer" unique_id=175775191]
+material = SubResource("ShaderMaterial_rjv1v")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 5
+texture_normal = ExtResource("5_dqey7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="OwnerOutline" type="Panel" parent="HostVBoxContainer/LobbyHBoxContainer/Player3VBoxContainer/Player3Portrait" unique_id=1486833]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Crown" type="TextureRect" parent="HostVBoxContainer/LobbyHBoxContainer/Player3VBoxContainer/Player3Portrait/OwnerOutline" unique_id=1566421366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = 29.99997
+offset_bottom = -49.999992
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+texture = ExtResource("6_1a838")
+expand_mode = 1
+
+[node name="NameClip" type="Control" parent="HostVBoxContainer/LobbyHBoxContainer/Player3VBoxContainer" unique_id=1357874859]
+custom_minimum_size = Vector2(0, 25)
+clip_contents = true
+layout_mode = 2
+script = ExtResource("6_mq3pm")
+
+[node name="Player3Label" type="Label" parent="HostVBoxContainer/LobbyHBoxContainer/Player3VBoxContainer/NameClip" unique_id=690558280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PlaceHolder"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Player2VBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/LobbyHBoxContainer" unique_id=871998967]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Player2Portrait" type="TextureButton" parent="HostVBoxContainer/LobbyHBoxContainer/Player2VBoxContainer" unique_id=270122769]
+material = SubResource("ShaderMaterial_rjv1v")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 5
+texture_normal = ExtResource("5_dqey7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="OwnerOutline" type="Panel" parent="HostVBoxContainer/LobbyHBoxContainer/Player2VBoxContainer/Player2Portrait" unique_id=286132738]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Crown" type="TextureRect" parent="HostVBoxContainer/LobbyHBoxContainer/Player2VBoxContainer/Player2Portrait/OwnerOutline" unique_id=353889907]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = 29.99997
+offset_bottom = -49.999992
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+texture = ExtResource("6_1a838")
+expand_mode = 1
+
+[node name="NameClip" type="Control" parent="HostVBoxContainer/LobbyHBoxContainer/Player2VBoxContainer" unique_id=415845824]
+custom_minimum_size = Vector2(0, 25)
+clip_contents = true
+layout_mode = 2
+script = ExtResource("6_mq3pm")
+
+[node name="Player2Label" type="Label" parent="HostVBoxContainer/LobbyHBoxContainer/Player2VBoxContainer/NameClip" unique_id=228993186]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PlaceHolder"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Player1VBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/LobbyHBoxContainer" unique_id=79719347]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Player1Portrait" type="TextureButton" parent="HostVBoxContainer/LobbyHBoxContainer/Player1VBoxContainer" unique_id=290918355]
+material = SubResource("ShaderMaterial_rjv1v")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 5
+texture_normal = ExtResource("5_dqey7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="OwnerOutline" type="Panel" parent="HostVBoxContainer/LobbyHBoxContainer/Player1VBoxContainer/Player1Portrait" unique_id=1978497627]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Crown" type="TextureRect" parent="HostVBoxContainer/LobbyHBoxContainer/Player1VBoxContainer/Player1Portrait/OwnerOutline" unique_id=1625027032]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = 29.99997
+offset_bottom = -49.999992
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+texture = ExtResource("6_1a838")
+expand_mode = 1
+
+[node name="NameClip" type="Control" parent="HostVBoxContainer/LobbyHBoxContainer/Player1VBoxContainer" unique_id=1383431645]
+custom_minimum_size = Vector2(0, 25)
+clip_contents = true
+layout_mode = 2
+script = ExtResource("6_mq3pm")
+
+[node name="Player1Label" type="Label" parent="HostVBoxContainer/LobbyHBoxContainer/Player1VBoxContainer/NameClip" unique_id=645583265]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PlaceHolder"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MeVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/LobbyHBoxContainer" unique_id=1298539197]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MePortrait" type="TextureButton" parent="HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer" unique_id=328190976]
+material = SubResource("ShaderMaterial_rjv1v")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 5
+texture_normal = SubResource("PlaceholderTexture2D_fcnqv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="OwnerOutline" type="Panel" parent="HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer/MePortrait" unique_id=1875792148]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Crown" type="TextureRect" parent="HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer/MePortrait/OwnerOutline" unique_id=1757141127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = 29.99997
+offset_bottom = -49.999992
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 2
+texture = ExtResource("6_1a838")
+expand_mode = 1
+
+[node name="NameClip" type="Control" parent="HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer" unique_id=1301649626]
+custom_minimum_size = Vector2(0, 25)
+clip_contents = true
+layout_mode = 2
+script = ExtResource("6_mq3pm")
+
+[node name="MeLabel" type="Label" parent="HostVBoxContainer/LobbyHBoxContainer/MeVBoxContainer/NameClip" unique_id=1164280376]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PlaceHolder"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="FriendsViewportContainer" type="SubViewportContainer" parent="HostVBoxContainer" unique_id=827904002 node_paths=PackedStringArray("scroll_container")]
+material = SubResource("ShaderMaterial_dqey7")
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+script = ExtResource("7_n2vdt")
+scroll_container = NodePath("SubViewport/ListScrollContainer")
+
+[node name="SubViewport" type="SubViewport" parent="HostVBoxContainer/FriendsViewportContainer" unique_id=385233060]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(660, 915)
+render_target_update_mode = 4
+
+[node name="ListScrollContainer" type="ScrollContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport" unique_id=397909370]
+custom_minimum_size = Vector2(0, 920)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer" unique_id=1802898088]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer" unique_id=1025978075]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="PartyCodeVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=511142524]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="PartyCodeInfoLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer" unique_id=1694366459]
+layout_mode = 2
+text = "Your Party Code:"
+
+[node name="PartyCodeHBoxContainer" type="HBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer" unique_id=1360666705]
+layout_mode = 2
+
+[node name="PartyCodeLineEdit" type="LineEdit" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer" unique_id=1342809974]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="HideTextureButton" type="TextureButton" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer" unique_id=1477150937]
+layout_mode = 2
+
+[node name="CopyTextureButton" type="TextureButton" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/PartyCodeVBoxContainer/PartyCodeHBoxContainer" unique_id=1718094694]
+layout_mode = 2
+texture_normal = ExtResource("12_5oa12")
+
+[node name="Confirm" type="Button" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=848695964]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host A Party!"
+
+[node name="ConfirmProgressBar" type="ProgressBar" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Confirm" unique_id=443159742]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0020001
+anchor_bottom = 1.0
+offset_right = -0.30004883
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 3.0
+show_percentage = false
+
+[node name="JoinVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=657452919]
+layout_mode = 2
+
+[node name="JoinInfoLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer" unique_id=791706098]
+layout_mode = 2
+text = "Join Party:"
+
+[node name="JoinHBoxContainer" type="HBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer" unique_id=1726559459]
+layout_mode = 2
+
+[node name="JoinLineEdit" type="LineEdit" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer/JoinHBoxContainer" unique_id=785094094]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="JoinTextureButton" type="TextureButton" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/JoinVBoxContainer/JoinHBoxContainer" unique_id=1600160582]
+layout_mode = 2
+texture_normal = ExtResource("12_or21h")
+
+[node name="Party" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=583610805]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PartyLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party" unique_id=730260996]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 25
+text = "Party"
+
+[node name="PartyVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party" unique_id=916854865]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="InvitesSentLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party" unique_id=1852389968]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 20
+text = "Invites Sent"
+
+[node name="InvitesSentVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Party" unique_id=137815861]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="InGame" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=109679694]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="InGameLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/InGame" unique_id=1265646507]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 25
+text = "In Game"
+
+[node name="InGameVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/InGame" unique_id=1876814481]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Online" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=1067436387]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OnlineLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Online" unique_id=413428447]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 25
+text = "Online"
+
+[node name="OnlineVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Online" unique_id=1501598032]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Offline" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer" unique_id=1667874896]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OfflineLabel" type="Label" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Offline" unique_id=1146161638]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(10, 0)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 25
+text = "Offline"
+
+[node name="OfflineVBoxContainer" type="VBoxContainer" parent="HostVBoxContainer/FriendsViewportContainer/SubViewport/ListScrollContainer/MarginContainer/VBoxContainer/Offline" unique_id=1011509649]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ErrorDisplay" type="Label" parent="." unique_id=1247649580]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.008
+anchor_top = 0.008
+anchor_right = 0.64900005
+anchor_bottom = 0.040000003
+offset_left = -0.3600006
+offset_top = 0.35999966
+offset_right = -0.080078125
+offset_bottom = -0.20000458
+theme_override_font_sizes/font_size = 24
+text = "Place Holder Error!"

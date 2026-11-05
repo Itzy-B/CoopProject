@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dhd4ikd26aeo7"]
+
+[ext_resource type="Script" uid="uid://csyolkeb8kjj" path="res://scripts/networking/friend_panel.gd" id="1_akrqn"]
+[ext_resource type="Texture2D" uid="uid://b8k4q7piy17yi" path="res://addons/kenny_ui/kenny_game_icons/White/1x/plus.png" id="2_67ocl"]
+[ext_resource type="Shader" uid="uid://cvbrbj2nx0qpf" path="res://shaders/ui/esc_menu/roundProfileShader.gdshader" id="2_jlb0f"]
+[ext_resource type="Texture2D" uid="uid://brgfiw3rr40pr" path="res://addons/kenny_ui/kenny_game_icons/White/1x/cross.png" id="3_8xu65"]
+[ext_resource type="Texture2D" uid="uid://f8mv1kqj20ci" path="res://addons/kenny_ui/kenny_game_icons/White/1x/door.png" id="4_67ocl"]
+[ext_resource type="Texture2D" uid="uid://dghv6me1sp4s0" path="res://addons/kenny_ui/kenny_game_icons/White/1x/exitRight.png" id="5_8xu65"]
+[ext_resource type="Texture2D" uid="uid://dqyidfpv6er4" path="res://addons/kenny_ui/kenny_game_icons/White/1x/massiveMultiplayer.png" id="6_ors8i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv6dw"]
+bg_color = Color(0, 0, 0, 0.49019608)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akrqn"]
+shader = ExtResource("2_jlb0f")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jv6dw"]
+
+[node name="FriendPanel" type="PanelContainer" unique_id=494370492]
+custom_minimum_size = Vector2(75, 0)
+offset_left = 8.0
+offset_right = 300.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jv6dw")
+script = ExtResource("1_akrqn")
+invite_texture = ExtResource("2_67ocl")
+cancel_texture = ExtResource("3_8xu65")
+kick_texture = ExtResource("4_67ocl")
+leave_texture = ExtResource("5_8xu65")
+join_texture = ExtResource("6_ors8i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1903549819]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer" unique_id=1154343856]
+material = SubResource("ShaderMaterial_akrqn")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = SubResource("PlaceholderTexture2D_jv6dw")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1852017242]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=265178119]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "PlaceHolder"
+text_overrun_behavior = 3
+
+[node name="Status" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=553134787]
+layout_mode = 2
+text = "PlaceHolder"
+
+[node name="MainActionButton" type="TextureButton" parent="HBoxContainer" unique_id=89915750]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="SecondaryActionButton" type="TextureButton" parent="HBoxContainer" unique_id=349577264]
+layout_mode = 2
+size_flags_vertical = 4

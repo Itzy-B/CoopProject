@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cj7oje6kpsarl"]
+
+[ext_resource type="Script" uid="uid://vqj1y8unpojr" path="res://scripts/main/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://cqdfj6aivqsd1" path="res://scenes/ui/esc_menu/esc_menu.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://wn653hx3rkf4" path="res://scenes/lobby/lobby.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://o3c2cd52dta2" path="res://scenes/ui/lobby/connection_loading.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://clvtb0sdvj7dh" path="res://scenes/ui/lobby/invitation_popup.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://bhsxitg4qv7kc" path="res://scenes/ui/voip/voice_status_popup.tscn" id="6_tefeu"]
+
+[node name="Main" type="Node" unique_id=1974591896]
+script = ExtResource("1_0wfyh")
+waiting_area_scene = ExtResource("2_sugp2")
+connection_loading_scene = ExtResource("3_tbgi4")
+invitation_popup_scene = ExtResource("4_jyhfs")
+voice_status_scene = ExtResource("6_tefeu")
+
+[node name="World" type="Node3D" parent="." unique_id=1299050125]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1930142290]
+
+[node name="EscMenu" parent="CanvasLayer" unique_id=895070378 instance=ExtResource("1_o5qli")]

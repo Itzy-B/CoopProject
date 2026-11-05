@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://yxcodfaonc1n"]
+
+[ext_resource type="Script" uid="uid://btdv0j3o1wx3k" path="res://scripts/voip/player_voice.gd" id="1_voice"]
+
+[sub_resource type="AudioStreamGenerator" id="Generator_proximity"]
+resource_local_to_scene = true
+mix_rate = 16000.0
+buffer_length = 0.2
+
+[sub_resource type="AudioStreamGenerator" id="Generator_radio"]
+resource_local_to_scene = true
+mix_rate = 16000.0
+buffer_length = 0.2
+
+[node name="PlayerVoice" type="Node3D" unique_id=734290185 node_paths=PackedStringArray("proximity_player", "radio_player")]
+script = ExtResource("1_voice")
+proximity_player = NodePath("ProximityPlayback")
+radio_player = NodePath("RadioPlayback")
+
+[node name="ProximityPlayback" type="AudioStreamPlayer3D" parent="." unique_id=617417614]
+stream = SubResource("Generator_proximity")
+unit_size = 5.0
+max_distance = 20.0
+
+[node name="RadioPlayback" type="AudioStreamPlayer" parent="." unique_id=1774187285]
+stream = SubResource("Generator_radio")
+volume_db = -3.0
